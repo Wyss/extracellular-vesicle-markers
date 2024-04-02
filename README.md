@@ -12,7 +12,7 @@ Broadly, the code uses protein annotations, gene expression data, and proteomics
 
 The data can be found at https://drive.google.com/drive/folders/1Tk0oUBIp15FeRNF7exkXnr-b5-Gvb0ff?usp=sharing. Download this to the same folder where you clone the repository.
 
-The structure of the repository should be as follows:
+The structure of the repository when set up should be as follows:
 
 EV_candidate_markers/
 
@@ -44,6 +44,7 @@ This should output figures in the ./results folder. The figures which were speci
 Please let us know if you have difficulty using this!
 
 Siddharth Iyer
+
 iyers@mit.edu
 
 ### Questions
