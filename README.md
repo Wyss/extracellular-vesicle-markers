@@ -15,11 +15,17 @@ The data can be found at https://drive.google.com/drive/folders/1Tk0oUBIp15FeRNF
 The structure of the repository should be as follows:
 
 EV_candidate_markers/
+
 ├─ bin/
+
 ├─ data/
+
 ├─ figures/
+
 ├─ results/
+
 ├─ supp_tables/
+
 
 ### Dependencies
 
