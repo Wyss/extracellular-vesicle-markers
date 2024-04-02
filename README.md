@@ -11,6 +11,7 @@ Broadly, the code uses protein annotations, gene expression data, and proteomics
 ### Data
 
 The data can be found at https://drive.google.com/drive/folders/1Tk0oUBIp15FeRNF7exkXnr-b5-Gvb0ff?usp=sharing. Download this to the same folder where you clone the repository.
+Make a new folder called results as well. 
 
 The structure of the repository when set up should be as follows:
 
