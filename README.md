@@ -10,12 +10,12 @@ Broadly, the code uses protein annotations, gene expression data, and proteomics
 
 ### Data
 
-The data can be found at https://drive.google.com/file/d/1LXzcGCcxBM3jGhP6zWl8XHFpz_PeWa2o/view?usp=drive_link. Download this to the same folder where you clone the repository.
-Make a new folder called results as well. 
+The data can be found at https://drive.google.com/file/d/1LXzcGCcxBM3jGhP6zWl8XHFpz_PeWa2o/view?usp=drive_link. Download this to the same folder where you clone the repository and unzip it there.
+Make a new folder called 'results' as well. 
 
 The structure of the repository when set up should be as follows:
 
-EV_candidate_markers/
+neuron_EV_markers/
 
 ├─ bin/
 
