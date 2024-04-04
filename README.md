@@ -27,6 +27,7 @@ neuron_EV_markers/
 
 ├─ supp_tables/
 
+./bin/ contains the code for the analysis, ./data/ contains the raw data used in the analysis, ./figures/ contains the figures produced for the paper, ./results contains other figures and results of the code which we found useful to save, and ./supp_tables/ contains the supplementary tables produced for the paper.
 
 ### Dependencies
 
