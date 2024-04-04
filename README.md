@@ -39,7 +39,7 @@ This code was run with Python version 3.7.
 
 To replicate our results, please clone this repository, download the data from the Google Drive link and install the python packages denoted in the requirements.txt file. Then, use the ./bin/figure_producer.ipynb notebook and click "Run All".
 
-If you would like to play around with our code or generate your own lists of candidates we have made a notebook called sandbox.ipynb. 
+If you would like to play around with our code or generate your own lists of candidates we have made a notebook called ./bin/sandbox.ipynb. 
 
 This should output figures in the ./results folder. The figures which were specifically used in the paper should be in the ./figures folder, and supplemental tables should be in the ./supp_tables folder. 
 
