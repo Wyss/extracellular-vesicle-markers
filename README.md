@@ -10,22 +10,17 @@ Broadly, the code uses protein annotations, gene expression data, and proteomics
 
 ### Data
 
-The data can be found at https://drive.google.com/file/d/1LXzcGCcxBM3jGhP6zWl8XHFpz_PeWa2o/view?usp=drive_link. Download this to the same folder where you clone the repository and unzip it there.
+The data can be found at https://drive.google.com/file/d/1-FaeyBwEVARi9_djuVjeCAKd08QSHEBE/view?usp=sharing. Download this to the same folder where you clone the repository and unzip it there.
 Make a new folder called 'results' as well. 
 
 The structure of the repository when set up should be as follows:
 
 neuron_EV_markers/
-
-├─ bin/
-
-├─ data/
-
-├─ figures/
-
-├─ results/
-
-├─ supp_tables/
+├── bin/           # Scripts and executable tools
+├── data/          # Raw and processed input data
+├── figures/       # Final figures for publication
+├── results/       # Output files and analysis results
+├── supp_tables/   # Supplementary tables and datasets
 
 ./bin/ contains the code for the analysis, ./data/ contains the raw data used in the analysis, ./figures/ contains the figures produced for the paper, ./results contains other figures and results of the code which we found useful to save, and ./supp_tables/ contains the supplementary tables produced for the paper.
 
