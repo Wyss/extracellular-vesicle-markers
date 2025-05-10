@@ -14,7 +14,8 @@ It also creates gene name/IPI to uniprot ID dictionaries.
 The primary way this codebase handles genes is as uniprot IDs, so making conversions is important.
 '''
 def import_proteins():
-    annotations = pd.read_csv('../data/prot_ann/uniprot-organism_homo_sapiens.tab',  sep='\t')
+    annotations = pd.read_csv('../data/prot_ann/uniprot-organism_homo_sapiens.tab',  sep='\t',
+                             low_memory = False)
     human_annotations = annotations[annotations.Organism == 'Homo sapiens (Human)']
 
     TMU = []
@@ -333,3 +334,7 @@ def import_IPSC_data(brain_celltype, g2u, oldg2u):
 
 
     return IPSC_uniprots
+
+def import_GPI():
+    gpi_u = pd.read_excel('../data/prot_ann/GPI_full_DB.xlsx')['Uniprot']
+    return list(gpi_u.values)

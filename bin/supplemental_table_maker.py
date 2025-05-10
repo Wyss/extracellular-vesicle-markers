@@ -15,18 +15,18 @@ import numpy as np
 
 
 '''
-S3 will unify based on genes which are maximally expressed in both the brain and the cell-type of choice.
+S4 will unify based on genes which are maximally expressed in both the brain and the cell-type of choice.
 Then it will use the tau-cutoffs of 0.7 for each to get specific genes and write a csv with those gene names.
 '''
 
-def s3(all_data, brain_cell_type):
+def s4(all_data, brain_cell_type):
     all_data = unify_tau_dataframes(all_data, all_data['max_uniprots'])
     all_data = get_specific_tau(all_data, 
                                      organ_tau_cutoff = 0.7,
                                       cell_tau_cutoff = 0.7,
                                      cluster_tau = False)
 
-    f = open('../supp_tables/table_s3_specific_brain_{}.csv'.format(brain_cell_type), 'w+')
+    f = open('../supp_tables/table_s4_specific_brain_{}.csv'.format(brain_cell_type), 'w+')
     f.write('Number,Gene Name, Transmembrane Domain?\n')
 
     for i, (u,g) in zip(np.arange(all_data['specific_tau'].shape[0]), all_data['specific_tau'].index):
@@ -37,12 +37,12 @@ def s3(all_data, brain_cell_type):
     f.close()
     
 '''
-S4 will find the sCimilarity scores for all the genes in each brain cell-type and write a csv which has them
+S5 will find the sCimilarity scores for all the genes in each brain cell-type and write a csv which has them
 and whether they have a transmembrane domain or not.
 '''
     
-def s4(all_data, brain_cell_type):
-    f = open('../supp_tables/table_s4_scimilarity_{}.csv'.format(brain_cell_type), 'w+')
+def s5(all_data, brain_cell_type):
+    f = open('../supp_tables/table_s5_scimilarity_{}.csv'.format(brain_cell_type), 'w+')
     f.write('Number,Gene Name, SCimilarity Attribution Score, Transmembrane Domain?\n')
     TMU_class = []
     for i, g, score in zip(np.arange(all_data['scRNA_data'].shape[0]), 
@@ -57,12 +57,12 @@ def s4(all_data, brain_cell_type):
     f.close()
     
 '''
-S5 will unify based on genes which are maximally expressed in both the brain and the cell-type of choice.
+S6 will unify based on genes which are maximally expressed in both the brain and the cell-type of choice.
 Then it will subset to the specific genes using a 0.7 tau score cutoff. Next, it will subset this list to only those
 with scRNAseq attribution > 0.001 for the given cell-type and write a csv with those genes.
 '''
 
-def s5(all_data, brain_cell_type):
+def s6(all_data, brain_cell_type):
     all_data = unify_tau_dataframes(all_data, all_data['max_uniprots'])
     all_data = get_specific_tau(all_data, 
                                      organ_tau_cutoff = 0.7,
@@ -72,7 +72,7 @@ def s5(all_data, brain_cell_type):
     all_data = get_final_list(all_data, exp_name = '20230730', topk= 20, use_scimilarity = False)
 
     table = all_data['candidates'][all_data['candidates']['scRNAseq Attribution'] > 0.001]
-    f = open('../supp_tables/table_s5_scimilarity_and_bulk_specific_{}.csv'.format(brain_cell_type), 'w+')
+    f = open('../supp_tables/table_s6_scimilarity_and_bulk_specific_{}.csv'.format(brain_cell_type), 'w+')
     f.write('Number,Gene Name, Transmembrane Domain?\n')
     uniprots = [u for u,g in table.index]
     for i, u in zip(np.arange(table.shape[0]), uniprots):
@@ -80,12 +80,12 @@ def s5(all_data, brain_cell_type):
     f.close()
 
 '''
-S6 will unify based on genes which are maximally expressed in both the brain and the cell-type of choice
+S7 will unify based on genes which are maximally expressed in both the brain and the cell-type of choice
 and have a transmembrane domain. Then it will subset to the specific genes using a 0.7 tau score cutoff.
 Finally, it will save this list of genes along with information about mass-spec appearances.
 '''
 
-def s6(all_data, brain_cell_type):
+def s7(all_data, brain_cell_type):
     all_data = unify_tau_dataframes(all_data, all_data['max_uniprots_TMU'])
     all_data = get_specific_tau(all_data, 
                                      organ_tau_cutoff = 0.7,
@@ -93,4 +93,22 @@ def s6(all_data, brain_cell_type):
                                      cluster_tau = False)
 
     all_data = get_final_list(all_data, exp_name = '20230730', topk= 20, use_scimilarity = False)
-    all_data['candidates'].to_csv('../supp_tables/table_s6_marker_candidates_{}.csv'.format(brain_cell_type))
+    all_data['candidates'].to_csv('../supp_tables/table_s7_marker_candidates_{}.csv'.format(brain_cell_type))
+   
+
+'''
+S will unify based on genes which are maximally expressed in both the brain and the cell-type of choice
+and have a GPI anchor. Then it will subset to the specific genes using a 0.7 tau score cutoff.
+Finally, it will save this list of genes along with information about mass-spec appearances.
+'''
+
+def s8(all_data, brain_cell_type):
+    all_data = unify_tau_dataframes(all_data, all_data['GPI Uniprots'])
+    all_data = get_specific_tau(all_data, 
+                                     organ_tau_cutoff = 0.7,
+                                      cell_tau_cutoff = 0.7,
+                                     cluster_tau = False)
+
+    all_data = get_final_list(all_data, exp_name = '20230730', topk= 20, use_scimilarity = False)
+    all_data['candidates'].to_csv('../supp_tables/table_s8_gpi_marker_candidates_{}.csv'.format(brain_cell_type))
+    

@@ -13,7 +13,7 @@ from sklearn.cluster import KMeans
 from itertools import compress
 
 #custom functions to import proteomics/expression/annotation data
-from import_surfacemarker_data import import_proteins, import_surfaceome, import_GTEx, import_brain_RNAseq, import_hpa_data, import_MS_DT, import_IPSC_data, import_HPPP, import_past_CSF_MS
+from import_surfacemarker_data import import_proteins, import_surfaceome, import_GTEx, import_brain_RNAseq, import_hpa_data, import_MS_DT, import_IPSC_data, import_HPPP, import_past_CSF_MS, import_GPI
 
 
 '''
@@ -42,6 +42,8 @@ def setup_datasets(brain_cell_type = 'neurons', organ_type= 'Brain'):
     
     scrna_data = pd.read_csv('../data/scimilarity_attributions/{}_gene_attributions.csv'.format(brain_cell_type))
     
+    #GPI anchor
+    gpi_uniprots = import_GPI()
     
     print('Importing mass spectrometry data...')
 
@@ -58,10 +60,11 @@ def setup_datasets(brain_cell_type = 'neurons', organ_type= 'Brain'):
     CSF_totals, CSF_EVs, CSF_total_names, CSF_EV_names = import_past_CSF_MS(i2u)
     mass_spec_names = ['DT Mass Spec - Plasma', 'DT Mass Spec - CSF',
                        'DT Mass Spec - Neuron Culture',
-                       'HPPP - Plasma', 'HPPP - CSF', 'iPSC Proteomics'] + CSF_total_names + CSF_EV_names;
+                       'HPPP - Plasma', 'HPPP - EV', 'iPSC Proteomics'] + CSF_total_names + CSF_EV_names;
 
     mass_spec_data = [mass_spec_plasma_cc, mass_spec_csf_cc, mass_spec_neuron_cc, 
                      HPPP_plasma_cc, HPPP_ev_cc, IPSC_uniprots] + CSF_totals + CSF_EVs
+
     print('Done!')
     
     
@@ -72,6 +75,7 @@ def setup_datasets(brain_cell_type = 'neurons', organ_type= 'Brain'):
                'oldu2g': oldu2g,
                'TMU': ec_tmu,
                'allTMU': allTMU,
+               'GPI Uniprots': gpi_uniprots,
                'surfaceome': surfaceome_TMU,
                'GTEX_data': compiled_gtex,
                'GTEX_names': gtex_genes,
