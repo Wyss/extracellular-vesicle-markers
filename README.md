@@ -16,15 +16,16 @@ Make a new folder called 'results' as well.
 The structure of the repository when set up should be as follows:
 
 neuron_EV_markers/
-├── bin/           # Scripts and executables
 
-├── data/          # Input data files
+    ├── bin/           # Scripts and executables
 
-├── figures/       # Figures for the manuscript
+    ├── data/          # Input data files
 
-├── results/       # Analysis outputs
+    ├── figures/       # Figures for the manuscript
 
-├── supp_tables/   # Supplementary tables
+    ├── results/       # Analysis outputs
+
+    ├── supp_tables/   # Supplementary tables
 
 ./bin/ contains the code for the analysis, ./data/ contains the raw data used in the analysis, ./figures/ contains the figures produced for the paper, ./results contains other figures and results of the code which we found useful to save, and ./supp_tables/ contains the supplementary tables produced for the paper.
 
