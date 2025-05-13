@@ -13,7 +13,7 @@ from sklearn.cluster import KMeans
 from itertools import compress
 
 #custom functions to import proteomics/expression/annotation data
-from import_surfacemarker_data import import_proteins, import_surfaceome, import_GTEx, import_brain_RNAseq, import_hpa_data, import_MS_DT, import_IPSC_data, import_HPPP, import_past_CSF_MS, import_GPI
+from import_surfacemarker_data import import_proteins, import_surfaceome, import_GTEx, import_brain_RNAseq, import_hpa_data, import_MS_DT, import_IPSC_data, import_HPPP, import_past_CSF_MS, import_GPI, import_mass_spec_10
 
 
 '''
@@ -100,6 +100,9 @@ def setup_datasets(brain_cell_type = 'neurons', organ_type= 'Brain'):
                'brain_cell_type': brain_cell_type,
                'organ_type': organ_type
               }
+    
+    all_data = import_mass_spec_10(all_data)
+    
     return all_data
 
                

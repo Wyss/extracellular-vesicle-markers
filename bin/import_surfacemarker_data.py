@@ -69,13 +69,17 @@ def import_proteins():
     oldTMU= list(TMProt.Entry)
     
     return oldTMU, TMU, ec_tmu, i2u, g2u, u2g, oldg2u, oldu2g
-        
+   
+    
+    
+    
+    
+    
 '''
 This function imports data from our own mass-spectrometry datasets of plasma, CSF, and IPS-neuron derived EVs.
 If any isoform of a given protein is found, we simply denote that this protein was found and drop the isoform annotation.
 This is because the RNA-sequencing datasets we use are not isoform resolved.
 '''
-
 def import_MS_DT():
 
     mass_spec_plasma = pd.read_csv('../data/DT_MS/201210X_SAM7799_Plasma_CC_125_mPOP-TK_ALLPlasma_LFQ.csv'); 
@@ -93,8 +97,10 @@ def import_MS_DT():
             mass_spec_neuron_cc.append(neuron_mass_spec.iloc[i]['accession_number'].split('-')[0])
         else:
             break;
-        
+            
+    
     return mass_spec_plasma_cc, mass_spec_csf_cc, mass_spec_neuron_cc
+
 
 '''
 This function imports HPPP proteomic datasets for plasma and plasma derived EVs.
@@ -108,10 +114,13 @@ def import_HPPP():
 
     return HPPP_plasma_cc, HPPP_ev_cc
 
+
+
+
+
 '''
 This function imports several previously published proteomic datasets for CSF.
 '''
-
 def import_past_CSF_MS(i2u):
     CSF_total_paths = ['../data/CSF_Data/CSF_total/Gulbrandsen2014/Gulbrandsen2014_S6.csv',
      '../data/CSF_Data/CSF_total/Zhang2007/Zhang2007_S1.csv',
@@ -168,6 +177,7 @@ def import_past_CSF_MS(i2u):
 
 
 
+
 '''
 This function imports all surfaceome classifications. 
 '''
@@ -178,6 +188,8 @@ def import_surfaceome():
         if surfaceome.iloc[row]['Surfaceome Label'] == 'surface':
             surfaceome_TMU.append(surfaceome.iloc[row]['UniProt accession'])
     return surfaceome_TMU
+    
+    
     
 '''
 This function imports gene expression data from GTEx.
@@ -212,11 +224,13 @@ def import_GTEx():
 #--------------------------importing Brain RNA seq data and compiling cell types together
 
 
+
+
+
 '''
 This function imports gene expression data from Brain RNA seq.
 We average the expression across all the mature cell-types to produce a single figure for a given cell-type.
 '''
-
 def import_brain_RNAseq():
     
     # load in FPKM data from brs et al 2016
@@ -263,6 +277,9 @@ def import_brain_RNAseq():
     return compiled_brs_2016_adjust, brs_2016.Gene,
 
 
+
+
+
 '''
 This function adjusts gene expression data columns to average together all the different brain regions/tissues.
 It also drops the testis.
@@ -285,6 +302,9 @@ def adjust_hpa_data(hpa_data, brain_parts = []):
     hpa_adjust['Brain'] = average_brain_cols;
     
     return hpa_adjust;
+
+
+
 
 '''
 This function imports HPA data (from RNA, IHC, and consensus).
@@ -316,6 +336,8 @@ def import_hpa_data():
     return hpa_ihc, hpa_ihc_genes, hpa_rna, hpa_rna_genes, hpa_consensus, hpa_consensus_genes
 
 
+
+
 '''
 This function imports proteomics data of IPSC-derived EVs from different cell-types.
 '''
@@ -335,6 +357,35 @@ def import_IPSC_data(brain_celltype, g2u, oldg2u):
 
     return IPSC_uniprots
 
+
+
+'''
+This function imports annotations of which proteins are GPI anchored.
+'''
 def import_GPI():
     gpi_u = pd.read_excel('../data/prot_ann/GPI_full_DB.xlsx')['Uniprot']
     return list(gpi_u.values)
+
+
+'''
+This function imports mass-spectrometry data from EVs isolated from plasma/CSF of 10 individuals.
+'''
+
+from surface_marker_utils import uniprot_conversion
+def import_mass_spec_10(all_data):
+    uniprot_lists = []
+    
+    files = ['../data/mass_spec_10/Plasma_Capto_10_Individuals_Preprocessed_Cleaned.csv',
+                 '../data/mass_spec_10/CSF_10_Individuals_Preprocessed_Cleaned.csv']
+    names = ['DT Plasma EVs from 10 individuals', 'DT CSF EVs from 10 individuals']
+    
+    for file, name in zip(files, names):
+        df = pd.read_csv(file)
+        # display(df)
+        uniprot_list = uniprot_conversion(df['Gene'], 
+                                                all_data['g2u'],
+                                                all_data['oldg2u'])
+        all_data['mass_spec_names'].append(name)
+        all_data['mass_spec'].append(uniprot_list)
+        
+    return all_data
