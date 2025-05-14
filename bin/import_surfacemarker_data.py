@@ -56,6 +56,7 @@ def import_proteins():
         gl = old_allProt.loc[i,'GeneNames_list']
         for g in gl:
             oldg2u[g] = old_allProt.loc[i,'Entry']
+    del g2u['CHD5']
     oldu2g = {v: k for k, v in oldg2u.items()};
     # filter all human proteins to transmembrane proteins only
     TMProt = old_allProt[pd.notnull(old_allProt['Transmembrane'])]
