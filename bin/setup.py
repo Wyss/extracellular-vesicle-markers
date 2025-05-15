@@ -26,6 +26,7 @@ def setup_datasets(brain_cell_type = 'neurons', organ_type= 'Brain'):
 
     oldTMU, TMU, ec_tmu, i2u, g2u, u2g, oldg2u, oldu2g = import_proteins();
     allTMU = set(oldTMU + TMU)
+    
 
     surfaceome_TMU = import_surfaceome();
 
@@ -102,6 +103,25 @@ def setup_datasets(brain_cell_type = 'neurons', organ_type= 'Brain'):
               }
     
     all_data = import_mass_spec_10(all_data)
+    
+#     import copy
+#     temp_set = copy.copy(all_data['allTMU'])
+#     for u in all_data['allTMU']:
+#         g_list= []
+#         for conv in [all_data['u2g'], all_data['oldu2g']]:
+#             if u in conv:
+#                 g_list.append(conv[u])
+
+#         u_list = []
+#         for conv in [all_data['g2u'], all_data['oldg2u']]:
+#             for g in g_list:
+#                 if g in conv:
+#                     u_list.append(conv[g])
+#         u_list = list(set(u_list))
+#         for u in u_list:
+#             if u not in temp_set:
+#                 temp_set.add(u)
+#     all_data['allTMU'] = temp_set
     
     return all_data
 

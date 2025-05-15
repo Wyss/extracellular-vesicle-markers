@@ -32,8 +32,10 @@ def s4(all_data, brain_cell_type):
     for i, (u,g) in zip(np.arange(all_data['specific_tau'].shape[0]), all_data['specific_tau'].index):
         if u in all_data['u2g']:
             f.write('{},{},{}\n'.format(i+1,all_data['u2g'][u], u in all_data['allTMU']))
-        elif u in all_data['oldu2g2g']:
+        elif u in all_data['oldu2g']:
             f.write('{},{},{}\n'.format(i+1,all_data['oldu2g'][u], u in all_data['allTMU']))
+        else:
+            f.write('{},{},{}\n'.format(i+1,u, u in all_data['allTMU']))
     f.close()
     
 '''
@@ -54,6 +56,8 @@ def s5(all_data, brain_cell_type):
         elif g in all_data['g2u']:
             tm = all_data['g2u'][g] in all_data['allTMU']
             f.write('{},{},{},{}\n'.format(i+1,g, score, tm))
+        else:
+            f.write('{},{},{}\n'.format(i+1,g,score, 'unknown'))
     f.close()
     
 '''

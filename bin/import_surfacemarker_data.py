@@ -372,7 +372,7 @@ def import_GPI():
 This function imports mass-spectrometry data from EVs isolated from plasma/CSF of 10 individuals.
 '''
 
-from surface_marker_utils import uniprot_conversion
+from surface_marker_utils import list_conversion
 def import_mass_spec_10(all_data):
     uniprot_lists = []
     
@@ -383,7 +383,7 @@ def import_mass_spec_10(all_data):
     for file, name in zip(files, names):
         df = pd.read_csv(file)
         # display(df)
-        uniprot_list = uniprot_conversion(df['Gene'], 
+        uniprot_list = list_conversion(df['Gene'], 
                                                 all_data['g2u'],
                                                 all_data['oldg2u'])
         all_data['mass_spec_names'].append(name)

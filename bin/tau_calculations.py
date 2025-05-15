@@ -81,7 +81,7 @@ It optionally will show a kernel-density estimate of the tau value distribution.
 def data_tau_process(all_data, expression_data, name, genes, brain_cell_type, organ_type, show_plots = True):
     
     pl_data = np.log2(expression_data.values.astype(float)+1);
-    genes_uniprot = uniprot_conversion(genes, all_data['g2u'], all_data['oldg2u']);
+    genes_uniprot = list_conversion(genes, all_data['g2u'], all_data['oldg2u']);
     
     if name == 'Brain_RNA-Seq':
         type_idx = list(expression_data.columns).index(brain_cell_type);

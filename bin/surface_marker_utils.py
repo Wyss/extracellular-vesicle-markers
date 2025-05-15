@@ -63,13 +63,20 @@ def heatmap_plot(mat, title_str, name, organ_type, brain_cell_type, brain_cutoff
     plt.savefig(full_path, transparent =True, dpi = 600)
     
 
-def uniprot_conversion(gene_list, g2u, oldg2u):
-    genes_u = []
+def list_conversion(gene_list, conv, old_conv):
+    id_list = []
     for gene in gene_list:
-        if gene in g2u:
-            genes_u.append(g2u[gene])
-        elif gene in oldg2u:
-            genes_u.append(oldg2u[gene])
+        if gene in conv:
+            conv_id = conv[gene]
+        elif gene in old_conv:
+            conv_id = old_conv[gene]  
         else:
-            genes_u.append('null')
-    return genes_u
+            conv_id = gene
+            
+        if conv_id != 'nan':
+            id_list.append(conv_id)
+        else:
+            id_list.append(gene)
+    return id_list
+
+
